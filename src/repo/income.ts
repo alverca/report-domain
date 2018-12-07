@@ -17,7 +17,7 @@ export default class IncomeRepository {
     /**
      * 興行外収入検索
      */
-    public async search(params: factory.income.attributes) {
+    public async search(params: Partial<factory.income.attributes>) {
         return this.incomeModel.findAll({
             where: params
         });
