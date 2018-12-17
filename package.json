@@ -3,7 +3,7 @@
     "name": "Motionpicture co.,ltd."
   },
   "dependencies": {
-    "@toei-jp/report-factory": "file:../report-factory",
+    "@toei-jp/report-factory": "^1.0.0",
     "debug": "^3.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
