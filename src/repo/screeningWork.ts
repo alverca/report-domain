@@ -17,7 +17,7 @@ export default class ScreeningWorkRepository {
         };
         const whereOption = <Sequelize.WhereOptions<typeof params>>findOption.where;
         if (typeof params.boxOfficeStart === 'object' && !(params.boxOfficeStart instanceof Date)) {
-            const boxOfficeStart = (<factory.common.IDateSearch>params.boxOfficeStart);
+            const boxOfficeStart = params.boxOfficeStart;
             whereOption.boxOfficeStart = { };
             if (boxOfficeStart.from !== undefined) {
                 whereOption.boxOfficeStart = {
@@ -33,8 +33,8 @@ export default class ScreeningWorkRepository {
             }
         }
 
-        if (typeof params.boxOfficeEnd === 'object' && !(params.boxOfficeStart instanceof Date)) {
-            const boxOfficeEnd = (<factory.common.IDateSearch>params.boxOfficeEnd);
+        if (typeof params.boxOfficeEnd === 'object' && !(params.boxOfficeEnd instanceof Date)) {
+            const boxOfficeEnd = params.boxOfficeEnd;
             whereOption.boxOfficeEnd = { };
             if (boxOfficeEnd.from !== undefined) {
                 whereOption.boxOfficeEnd = {
