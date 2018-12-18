@@ -9,7 +9,7 @@ export interface IIncomeInstance extends
 
 export interface IIncomeModel extends Sequelize.Model<IIncomeInstance, factory.income.attributes> { }
 
-// tslint:disable:no-magic-numbers
+// tslint:disable:no-magic-numbers max-func-body-length
 export default (sqlize: Sequelize.Sequelize) => {
     return sqlize.define<IIncomeInstance, factory.income.attributes>(
         'income',
@@ -66,11 +66,11 @@ export default (sqlize: Sequelize.Sequelize) => {
             },
             opponentSubjectCd: {
                 type: Sequelize.STRING(100),
-                field: '相手科目CD'
+                field: '相手細目CD'
             },
             opponentSubjectName: {
                 type: Sequelize.DECIMAL(100),
-                field: '相手科目名'
+                field: '相手細目名'
             },
             note: {
                 type: Sequelize.TEXT,
@@ -83,6 +83,18 @@ export default (sqlize: Sequelize.Sequelize) => {
             movieName: {
                 type: Sequelize.STRING(100),
                 field: '作品名'
+            },
+            workId: {
+                type: Sequelize.STRING(100),
+                field: '上映作品ID'
+            },
+            workCd: {
+                type: Sequelize.STRING(100),
+                field: '上映作品CD'
+            },
+            workName: {
+                type: Sequelize.STRING(100),
+                field: '上映作品名'
             },
             createdAt: {
                 type: Sequelize.DATE,

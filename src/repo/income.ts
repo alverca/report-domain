@@ -19,7 +19,8 @@ export default class IncomeRepository {
      */
     public async search(params: Partial<factory.income.attributes>) {
         return this.incomeModel.findAll({
-            where: params
+            where: params,
+            order: [ 'createdAt' ]
         });
     }
 
