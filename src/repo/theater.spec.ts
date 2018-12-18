@@ -6,7 +6,7 @@ import * as assert from 'power-assert';
 
 import Repository from './theater';
 
-describe('UserRepository', () => {
+describe('TheaterRepository', () => {
     let sequelizeMock: any;
     before(() => {
         // tslint:disable-next-line:no-require-imports

@@ -9,7 +9,7 @@ import AccountRepository from './account';
 
 let sandbox: sinon.SinonSandbox;
 
-describe('UserRepository', () => {
+describe('AccountRepository', () => {
     let sequelizeMock: any;
     before(() => {
         // tslint:disable-next-line:no-require-imports
