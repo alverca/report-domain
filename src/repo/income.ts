@@ -56,7 +56,7 @@ export default class IncomeRepository {
                     && a.opponentSubjectCd === b.opponentSubjectCd
                     // tslint:disable-next-line:triple-equals
                     && a.amount            ==  b.amount
-                    && a.movieCd           === b.movieCd
+                    && a.screeningWorkId   === b.screeningWorkId
                     && a.note              === b.note
                     // tslint:disable-next-line:triple-equals
                     && a.quantity          ==  b.quantity;

@@ -76,25 +76,21 @@ export default (sqlize: Sequelize.Sequelize) => {
                 type: Sequelize.TEXT,
                 field: '備考'
             },
-            movieCd: {
-                type: Sequelize.STRING(100),
-                field: '作品CD'
-            },
-            movieName: {
-                type: Sequelize.STRING(100),
-                field: '作品名'
-            },
-            workId: {
-                type: Sequelize.STRING(100),
+            screeningWorkId: {
+                type: Sequelize.STRING(50),
                 field: '上映作品ID'
             },
             workCd: {
-                type: Sequelize.STRING(100),
-                field: '上映作品CD'
+                type: Sequelize.STRING(50),
+                field: '作品CD'
             },
-            workName: {
-                type: Sequelize.STRING(100),
+            screeningWorkName: {
+                type: Sequelize.STRING(200),
                 field: '上映作品名'
+            },
+            screeningWorkSubTitle: {
+                type: Sequelize.STRING(200),
+                field: '上映作品サブタイトル'
             },
             createdAt: {
                 type: Sequelize.DATE,
