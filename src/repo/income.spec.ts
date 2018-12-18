@@ -10,7 +10,7 @@ import Repository from './income';
 
 let sandbox: sinon.SinonSandbox;
 
-describe('UserRepository', () => {
+describe('IncomeRepository', () => {
     let sequelizeMock: any;
     before(() => {
         // tslint:disable-next-line:no-require-imports
@@ -31,7 +31,10 @@ describe('UserRepository', () => {
                 theaterCd: '001',
                 date: new Date()
             };
-            const expectedArgs = { where: findArgs };
+            const expectedArgs = {
+                order: ['createdAt'],
+                where: findArgs
+            };
             const expectedResult = [{ id: 0 }];
             const repo = new Repository(new sequelizeMock());
             const model = repo.incomeModel;
