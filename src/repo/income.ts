@@ -25,6 +25,14 @@ export default class IncomeRepository {
     }
 
     public async bulkModifyByDateAndTheater(params: factory.income.attributes[]) {
+        _.forEach(params, (i) => {
+            if (i.amount < 1) {
+                (<Number | null>i.amount) = null;
+            }
+            if (i.quantity < 1) {
+                (<Number | null>i.quantity) = null;
+            }
+        });
         const transaction = await this.sequelize.transaction();
         try {
             const ogAccounts = (await this.incomeModel.findAll({
@@ -35,10 +43,11 @@ export default class IncomeRepository {
             })).map((account) => account.get({ plain: true }));
 
             const deletedData = _.differenceBy(ogAccounts, params, 'id');
+            const deletedDataIds = _.map(deletedData, 'id');
             if (deletedData.length > 0) {
                 await this.incomeModel.destroy({
                     where: {
-                        id: { [Sequelize.Op.in]: [ _(deletedData).map('id') ] }
+                        id: { [Sequelize.Op.in]: deletedDataIds }
                     }
                 });
             }
@@ -62,10 +71,13 @@ export default class IncomeRepository {
                     && a.quantity          ==  b.quantity;
             });
             _(updatedData).forEach(async (data) => {
-                await this.incomeModel.update(data, { where: { id: data.id } });
+                await this.incomeModel.update(data, {
+                    where: { id: data.id }
+                });
             });
+            await transaction.commit();
         } catch (err) {
-            transaction.rollback();
+            await transaction.rollback();
             throw(err);
         }
     }

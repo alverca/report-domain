@@ -54,7 +54,8 @@
             "parameter",
             "property-declaration",
             "member-variable-declaration"
-        ]
+        ],
+        "underscore-consistent-invocation": false
     },
     "rulesDirectory": [
         "node_modules/tslint-microsoft-contrib"

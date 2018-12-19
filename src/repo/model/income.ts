@@ -57,19 +57,19 @@ export default (sqlize: Sequelize.Sequelize) => {
                 field: '細目名'
             },
             quantity: {
-                type: Sequelize.STRING(100),
+                type: Sequelize.INTEGER,
                 field: '数量'
             },
             amount: {
-                type: Sequelize.STRING(100),
+                type: Sequelize.INTEGER,
                 field: '金額'
             },
             opponentSubjectCd: {
-                type: Sequelize.STRING(100),
+                type: Sequelize.STRING(50),
                 field: '相手細目CD'
             },
             opponentSubjectName: {
-                type: Sequelize.DECIMAL(100),
+                type: Sequelize.STRING(100),
                 field: '相手細目名'
             },
             note: {
