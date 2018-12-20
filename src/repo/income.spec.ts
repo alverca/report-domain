@@ -83,7 +83,10 @@ describe('IncomeRepository', () => {
                 theaterCd
             }];
 
-            const repo = new Repository(new sequelizeMock());
+            const sqlize = new sequelizeMock();
+            const commitStub = sandbox.stub().resolves();
+            sqlize.transaction = async () => ({ commit: commitStub });
+            const repo = new Repository(sqlize);
             const model = repo.incomeModel;
 
             sandbox.mock(model).expects('findAll').once()
@@ -104,6 +107,7 @@ describe('IncomeRepository', () => {
 
             const result = await repo.bulkModifyByDateAndTheater(<any>data);
             assert.equal(result, undefined);
+            assert(commitStub.calledOnce);
             sandbox.verify();
         });
 
@@ -122,7 +126,10 @@ describe('IncomeRepository', () => {
                 theaterCd
             }];
 
-            const repo = new Repository(new sequelizeMock());
+            const sqlize = new sequelizeMock();
+            const rollbackStub = sandbox.stub().resolves();
+            sqlize.transaction = async () => ({ rollback: rollbackStub });
+            const repo = new Repository(sqlize);
             const model = repo.incomeModel;
 
             sandbox.mock(model).expects('findAll').once()
@@ -132,6 +139,7 @@ describe('IncomeRepository', () => {
             const result = await repo.bulkModifyByDateAndTheater(<any>data)
                 .catch((err) => err);
             assert(result instanceof Error);
+            assert(rollbackStub.calledOnce);
             sandbox.verify();
         });
 
@@ -142,7 +150,9 @@ describe('IncomeRepository', () => {
                 id: '0001',
                 subjectDetailCd: '1234',
                 date,
-                theaterCd
+                theaterCd,
+                quantity: null,
+                amount: null
             }, {
                 id: '0002',
                 subjectDetailCd: '1234',
@@ -153,12 +163,16 @@ describe('IncomeRepository', () => {
                 id: '0001',
                 subjectDetailCd: '1234',
                 date,
-                theaterCd
+                theaterCd,
+                quantity: '',
+                amount: ''
             }, {
                 id: '0002',
                 subjectDetailCd: '12345',
                 date,
-                theaterCd
+                theaterCd,
+                quantity: 10,
+                amount: 1000
             }];
 
             const sqlize = new sequelizeMock();
