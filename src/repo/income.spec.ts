@@ -32,7 +32,7 @@ describe('IncomeRepository', () => {
                 date: new Date()
             };
             const expectedArgs = {
-                order: ['createdAt'],
+                order: ['subjectDetailCd', 'opponentSubjectCd'],
                 where: findArgs
             };
             const expectedResult = [{ id: 0 }];
@@ -150,9 +150,7 @@ describe('IncomeRepository', () => {
                 id: '0001',
                 subjectDetailCd: '1234',
                 date,
-                theaterCd,
-                quantity: null,
-                amount: null
+                theaterCd
             }, {
                 id: '0002',
                 subjectDetailCd: '1234',
@@ -163,16 +161,12 @@ describe('IncomeRepository', () => {
                 id: '0001',
                 subjectDetailCd: '1234',
                 date,
-                theaterCd,
-                quantity: '',
-                amount: ''
+                theaterCd
             }, {
                 id: '0002',
                 subjectDetailCd: '12345',
                 date,
-                theaterCd,
-                quantity: 10,
-                amount: 1000
+                theaterCd
             }];
 
             const sqlize = new sequelizeMock();

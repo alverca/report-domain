@@ -20,19 +20,11 @@ export default class IncomeRepository {
     public async search(params: Partial<factory.income.attributes>) {
         return this.incomeModel.findAll({
             where: params,
-            order: [ 'createdAt' ]
+            order: [ 'subjectDetailCd', 'opponentSubjectCd' ]
         });
     }
 
     public async bulkModifyByDateAndTheater(params: factory.income.attributes[]) {
-        _.forEach(params, (i) => {
-            if (i.amount < 1) {
-                (<Number | null>i.amount) = null;
-            }
-            if (i.quantity < 1) {
-                (<Number | null>i.quantity) = null;
-            }
-        });
         const transaction = await this.sequelize.transaction();
         try {
             const ogAccounts = (await this.incomeModel.findAll({
